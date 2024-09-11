@@ -2,59 +2,241 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Linear Regression Model Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Dự Đoán Khả Năng Trả Nợ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(166, 217, 247);
+        }
+        input, select {
+            border: 1px solid gray;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Nhập Dữ Liệu để Dự Đoán</h1>
-    <form id="prediction-form">
-        <label for="indus">INDUS:</label>
-        <input type="number" id="indus" name="indus" step="any" required><br>
+    <h1 class="text-center my-5">Nhập thông tin khách hàng để dự đoán khả năng trả nợ</h1>
+    <div class="container" style="padding-left: 10%;">
+        <div class="row justify-content-between">
+            <div class="col-sm-6">
+                <form id="predictForm" class="row flex-row">
+                    <label class="col-sm-6 my-2" for="CODE_GENDER">CODE_GENDER:</label>
+                    <select class="col-sm-3 my-2" id="CODE_GENDER" name="CODE_GENDER" required>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select><br><br>
 
-        <label for="nox">NOX:</label>
-        <input type="number" id="nox" name="nox" step="any" required><br>
+                    <label class="col-sm-6 my-2" for="FLAG_OWN_CAR">FLAG_OWN_CAR:</label>
+                    <select class="col-sm-3 my-2" id="FLAG_OWN_CAR" name="FLAG_OWN_CAR" required>
+                        <option value="Y">Y</option>
+                        <option value="N">N</option>
+                    </select><br><br>
 
-        <label for="rm">RM:</label>
-        <input type="number" id="rm" name="rm" step="any" required><br>
+                    <label class="col-sm-6 my-2" for="FLAG_OWN_REALTY">FLAG_OWN_REALTY:</label>
+                    <select class="col-sm-3 my-2" id="FLAG_OWN_REALTY" name="FLAG_OWN_REALTY" required>
+                        <option value="Y">Y</option>
+                        <option value="N">N</option>
+                    </select><br><br>
 
-        <label for="tax">TAX:</label>
-        <input type="number" id="tax" name="tax" step="any" required><br>
+                    <label class="col-sm-6 my-2" for="CNT_CHILDREN">CNT_CHILDREN:</label>
+                    <input class="col-sm-3 my-2" type="number" id="CNT_CHILDREN" name="CNT_CHILDREN" required><br><br>
 
-        <label for="ptratio">PTRATIO:</label>
-        <input type="number" id="ptratio" name="ptratio" step="any" required><br>
+                    <label class="col-sm-6 my-2" for="NAME_FAMILY_STATUS">NAME_FAMILY_STATUS:</label>
+                    <select class="col-sm-3 my-2" id="NAME_FAMILY_STATUS" name="NAME_FAMILY_STATUS" required>
+                        <option value="Separated">Separated</option>
+                        <option value="Married">Married</option>
+                        <option value="Single / not married">Single / not married</option>
+                        <option value="Widow">Widow</option>
+                        <option value="Civil marriage">Civil marriage</option>
+                    </select><br><br>
 
-        <label for="lstat">LSTAT:</label>
-        <input type="number" id="lstat" name="lstat" step="any" required><br>
+                    <label class="col-sm-6 my-2" for="AMT_INCOME_TOTAL">AMT_INCOME_TOTAL:</label>
+                    <input class="col-sm-3 my-2" type="number" id="AMT_INCOME_TOTAL" name="AMT_INCOME_TOTAL" step="any" required><br><br>
 
-        <button type="button" onclick="makePrediction()">Dự Đoán</button>
-    </form>
-    <p id="result"></p>
+                    <label class="col-sm-6 my-2" for="AMT_GOODS_PRICE">AMT_GOODS_PRICE:</label>
+                    <input class="col-sm-3 my-2" type="number" id="AMT_GOODS_PRICE" name="AMT_GOODS_PRICE" step="any" required><br><br>
 
+                    <label class="col-sm-6 my-2" for="OCCUPATION_TYPE">OCCUPATION_TYPE:</label>
+                    <select class="col-sm-3 my-2" id="OCCUPATION_TYPE" name="OCCUPATION_TYPE" required>
+                        <option value="Managers">Managers</option>
+                        <option value="HR staff">HR staff</option>
+                        <option value="Medicine staff">Medicine staff</option>
+                        <option value="Accountants">Accountants</option>
+                        <option value="Laborers">Laborers</option>
+                        <option value="Unknown">Unknown</option>
+                        <option value="Cleaning staff">Cleaning staff</option>
+                        <option value="Private service staff">Private service staff</option>
+                        <option value="Drivers">Drivers</option>
+                        <option value="Sales staff">Sales staff</option>
+                        <option value="Realty agents">Realty agents</option>
+                        <option value="IT staff">IT staff</option>
+                        <option value="Security staff">Security staff</option>
+                        <option value="Secretaries">Secretaries</option>
+                        <option value="Low-skill Laborers">Low-skill Laborers</option>
+                        <option value="Core staff">Core staff</option>
+                        <option value="Cooking staff">Cooking staff</option>
+                        <option value="High skill tech staff">High skill tech staff</option>
+                        <option value="Waiters/barmen staff">Waiters/barmen staff</option>
+                    </select><br><br>
+
+                    <label class="col-sm-6 my-2" for="DAYS_EMPLOYED">DAYS_EMPLOYED (tính theo ngày âm):</label>
+                    <input class="col-sm-3 my-2" type="number" id="DAYS_EMPLOYED" name="DAYS_EMPLOYED" required><br><br>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <form class="row flex-row">
+                    <label class="col-sm-6 my-2" for="BUREAU_LOAN_COUNT">BUREAU_LOAN_COUNT:</label>
+                    <input class="col-sm-3 my-2" type="number" id="BUREAU_LOAN_COUNT" name="BUREAU_LOAN_COUNT" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="ACTIVE_LOANS_COUNT">ACTIVE_LOANS_COUNT:</label>
+                    <input class="col-sm-3 my-2" type="number" id="ACTIVE_LOANS_COUNT" name="ACTIVE_LOANS_COUNT" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="TOTAL_DAYS_OVERDUE">TOTAL_DAYS_OVERDUE:</label>
+                    <input class="col-sm-3 my-2" type="number" id="TOTAL_DAYS_OVERDUE" name="TOTAL_DAYS_OVERDUE" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="TOTAL_CREDIT_SUM">TOTAL_CREDIT_SUM:</label>
+                    <input class="col-sm-3 my-2" type="number" id="TOTAL_CREDIT_SUM" name="TOTAL_CREDIT_SUM" step="any" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="TOTAL_CREDIT_SUM_DEBT">TOTAL_CREDIT_SUM_DEBT:</label>
+                    <input class="col-sm-3 my-2" type="number" id="TOTAL_CREDIT_SUM_DEBT" name="TOTAL_CREDIT_SUM_DEBT" step="any" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="AMT_CREDIT_SUM_OVERDUE">AMT_CREDIT_SUM_OVERDUE:</label>
+                    <input class="col-sm-3 my-2" type="number" id="AMT_CREDIT_SUM_OVERDUE" name="AMT_CREDIT_SUM_OVERDUE" step="any" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="MEAN_CREDIT_SUM_LIMIT">MEAN_CREDIT_SUM_LIMIT:</label>
+                    <input class="col-sm-3 my-2" type="number" id="MEAN_CREDIT_SUM_LIMIT" name="MEAN_CREDIT_SUM_LIMIT" step="any" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="CREDIT_CARD_LOANS_COUNT">CREDIT_CARD_LOANS_COUNT:</label>
+                    <input class="col-sm-3 my-2" type="number" id="CREDIT_CARD_LOANS_COUNT" name="CREDIT_CARD_LOANS_COUNT" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="LOANS_LAST_6_MONTHS">LOANS_LAST_6_MONTHS:</label>
+                    <input class="col-sm-3 my-2" type="number" id="LOANS_LAST_6_MONTHS" name="LOANS_LAST_6_MONTHS" required><br><br>
+
+                    <label class="col-sm-6 my-2" for="LOANS_LAST_9_MONTHS">LOANS_LAST_9_MONTHS:</label>
+                    <input class="col-sm-3 my-2" type="number" id="LOANS_LAST_9_MONTHS" name="LOANS_LAST_9_MONTHS" required><br><br>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success w-25 my-4 fw-bold" type="button" onclick="makePrediction()">Predit</button>
+        </div>
+    </div>
+    <h2 class="text-center my-5"><pre class="text-danger fw-bold" id="result"></pre></h2>
+
+
+    <!-- <script>
+        function submitForm() {
+            const form = document.getElementById('predictForm');
+            const formData = new FormData(form);
+
+            const data = {};
+            formData.forEach((value, key) => {
+                // Chỉ parseFloat cho các trường số, để giữ nguyên giá trị chuỗi cho các trường khác
+                data[key] = (key === 'CODE_GENDER' || key === 'FLAG_OWN_CAR' || key === 'FLAG_OWN_REALTY' || key === 'NAME_FAMILY_STATUS') 
+                    ? value 
+                    : parseFloat(value);
+            });
+
+            console.log("Dữ liệu gửi đi:", data);
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Có lỗi xảy ra: ' + error;
+            });
+        }
+    </script> -->
     <script>
         async function makePrediction() {
-            const indus = parseFloat(document.getElementById('indus').value);
-            const nox = parseFloat(document.getElementById('nox').value);
-            const rm = parseFloat(document.getElementById('rm').value);
-            const tax = parseFloat(document.getElementById('tax').value);
-            const ptratio = parseFloat(document.getElementById('ptratio').value);
-            const lstat = parseFloat(document.getElementById('lstat').value);
+            
+            const codeGender = document.getElementById('CODE_GENDER').value;
+            const flagOwnCar = (document.getElementById('FLAG_OWN_CAR').value);
+            const flagOwnRealty = (document.getElementById('FLAG_OWN_REALTY').value);
+            const cntChildren = parseFloat(document.getElementById('CNT_CHILDREN').value);
+            const nameFamilyStatus = (document.getElementById('NAME_FAMILY_STATUS').value);
+            const amtIncomeTotal = parseFloat(document.getElementById('AMT_INCOME_TOTAL').value);
+            const amtGoodsPrice = parseFloat(document.getElementById('AMT_GOODS_PRICE').value);
+            const occupationType = (document.getElementById('OCCUPATION_TYPE').value);
+            const daysEmployed = parseFloat(document.getElementById('DAYS_EMPLOYED').value);
+            const bureauLoanCount = parseFloat(document.getElementById('BUREAU_LOAN_COUNT').value);
+            const activeLoansCount = parseFloat(document.getElementById('ACTIVE_LOANS_COUNT').value);
+            const totalDaysOverdue = parseFloat(document.getElementById('TOTAL_DAYS_OVERDUE').value);
+            const totalCreditSum = parseFloat(document.getElementById('TOTAL_CREDIT_SUM').value);
+            const totalCreditSumDebt = parseFloat(document.getElementById('TOTAL_CREDIT_SUM_DEBT').value);
+            const amtCreditSumOverdue = parseFloat(document.getElementById('AMT_CREDIT_SUM_OVERDUE').value);
+            const meanCreditSumLimit = parseFloat(document.getElementById('MEAN_CREDIT_SUM_LIMIT').value);
+            const creditCardLoansCount = parseFloat(document.getElementById('CREDIT_CARD_LOANS_COUNT').value);
+            const loansLast6Months = parseFloat(document.getElementById('LOANS_LAST_6_MONTHS').value);
+            const loansLast9Months = parseFloat(document.getElementById('LOANS_LAST_9_MONTHS').value);
+    
+            
+            const features = {
+                CODE_GENDER: codeGender,
+                FLAG_OWN_CAR: flagOwnCar,
+                FLAG_OWN_REALTY: flagOwnRealty,
+                CNT_CHILDREN: cntChildren,
+                NAME_FAMILY_STATUS: nameFamilyStatus,
+                AMT_INCOME_TOTAL: amtIncomeTotal,
+                AMT_GOODS_PRICE: amtGoodsPrice,
+                OCCUPATION_TYPE: occupationType,
+                DAYS_EMPLOYED: daysEmployed,
+                BUREAU_LOAN_COUNT: bureauLoanCount,
+                ACTIVE_LOANS_COUNT: activeLoansCount,
+                TOTAL_DAYS_OVERDUE: totalDaysOverdue,
+                TOTAL_CREDIT_SUM: totalCreditSum,
+                TOTAL_CREDIT_SUM_DEBT: totalCreditSumDebt,
+                AMT_CREDIT_SUM_OVERDUE: amtCreditSumOverdue,
+                MEAN_CREDIT_SUM_LIMIT: meanCreditSumLimit,
+                CREDIT_CARD_LOANS_COUNT: creditCardLoansCount,
+                LOANS_LAST_6_MONTHS: loansLast6Months,
+                LOANS_LAST_9_MONTHS: loansLast9Months
+            };
 
-            // Tạo mảng features với 6 đặc trưng
-            const features = [indus, nox, rm, tax, ptratio, lstat];
-
+            console.log('Features sent to server:', features);
+    
             try {
-                const response = await fetch('/api/predict/', {
+                const response = await fetch('/predict', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ features: features })
+                    body: JSON.stringify(features)
                 });
 
                 const result = await response.json();
-                document.getElementById('result').innerText = 'Dự đoán: ' + result.prediction;
+                console.log('Prediction result from server:', result); 
+
+
+                let predictionText = '';
+                if (result.prediction === 0) {
+                    predictionText = 'Trả được nợ';
+                } else if (result.prediction === 1) {
+                    predictionText = 'Không trả được nợ';
+                }
+    
+                // const result = await response.json();
+                // document.getElementById('result').innerText = 'Dự đoán: ' + result.prediction;
+                document.getElementById('result').innerText = 'Kết quả dự đoán: ' + predictionText;
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('result').innerText = 'Có lỗi xảy ra.';
             }
         }
+    
+        
+        document.querySelector('button').addEventListener('click', makePrediction);
     </script>
+    
 </body>
 </html>
